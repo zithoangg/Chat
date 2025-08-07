@@ -1,0 +1,45 @@
+name: Build and Deploy to Azure Static Web Apps
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull request to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Set up Node.js for React build
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    # Install dependencies
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./frontend
+
+    # Build the React app
+    - name: Build the React app
+      run: npm run build
+      working-directory: ./frontend
+
+    # Deploy the app to Azure Static Web App
+    - name: 'Deploy to Azure Static Web App'
+      uses: Azure/static-web-apps-deploy@v1
+      with:
+        azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ORANGE_FLOWER_06D693000 }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        action: "upload"
+        app_location: "/frontend"  # Location of your frontend code (React app)
+        api_location: "/api"  # Location of your Azure Functions code
+        output_location: "/frontend/build"  # Location of the build output
