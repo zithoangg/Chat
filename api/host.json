@@ -1,0 +1,15 @@
+{
+  "version": "2.0",
+  "functions": [
+    "send_message",
+    "get_messages"
+  ],
+  "logging": {
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "maxTelemetryItemsPerSecond": 5
+      }
+    }
+  }
+}
