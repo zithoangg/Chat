@@ -27,6 +27,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           ###### Repository/Build Configurations ######
-          app_location: "./frontend"  # Path to your frontend code
+          app_location: ""  # Path to your frontend code
           api_location: "./api"  # Path to your Azure Functions code
-          output_location: "build"  # Path to build output (React app build folder)
+          output_location: ""  # Path to build output (React app build folder)
+
