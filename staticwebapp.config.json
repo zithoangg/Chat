@@ -1,0 +1,5 @@
+{
+  "routes": [
+    { "route": "/", "redirect": "/api/token" }   // optional: land on token endpoint
+  ]
+}
