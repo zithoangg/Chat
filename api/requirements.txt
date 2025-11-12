@@ -1,4 +1,0 @@
-azure-functions
-requests
-azure-cosmos
-# Add other dependencies as needed
