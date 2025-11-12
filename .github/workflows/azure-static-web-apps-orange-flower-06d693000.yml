@@ -2,12 +2,10 @@ name: Azure Static Web Apps CI/CD
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
   pull_request:
     types: [opened, synchronize, reopened, closed]
-    branches:
-      - master
+    branches: [ master ]
 
 jobs:
   build_and_deploy_job:
@@ -15,10 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: false
           lfs: false
+
+      # ⬇️ No 'pip install' step here
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -26,8 +27,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ORANGE_FLOWER_06D693000 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          ###### Repository/Build Configurations ######
-          app_location: ""  # Path to your frontend code
-          api_location: "./api"  # Path to your Azure Functions code
-          output_location: ""  # Path to build output (React app build folder)
 
+          app_location: ""          # root (no frontend)
+          output_location: ""       # none
+          api_location: "./api"
