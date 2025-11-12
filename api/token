@@ -1,8 +1,0 @@
-# /api/token/function.json and host.json are created by SWA init; this is the handler
-import azure.functions as func
-
-def main(req: func.HttpRequest) -> func.HttpResponse:
-    token = req.headers.get('x-ms-token-aad-access-token')  # or 'x-ms-token-aad-id-token'
-    if not token:
-        return func.HttpResponse("No token header found (user not authenticated).", status_code=401)
-    return func.HttpResponse(token, status_code=200)
